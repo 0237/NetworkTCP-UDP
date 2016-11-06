@@ -11,6 +11,9 @@ public:
 	void SetParent(CMFCApplication3Dlg * pDlg);
 private:
 	CMFCApplication3Dlg* m_pDlg;//对话框类指针变量
+public:
+	virtual void OnClose(int nErrorCode);
+	virtual void OnConnect(int nErrorCode);
 };
 
 
