@@ -12,9 +12,7 @@ class CMFCApplication3Dlg : public CDialogEx
 // 构造
 public:
 	CMFCApplication3Dlg(CWnd* pParent = NULL);	// 标准构造函数
-	UPDClient m_sConnectSocket;
-	void OnClose();
-	void OnConnect();
+	CUDPClient m_sConnectSocket;
 	void OnReceive();
 // 对话框数据
 #ifdef AFX_DESIGN_TIME

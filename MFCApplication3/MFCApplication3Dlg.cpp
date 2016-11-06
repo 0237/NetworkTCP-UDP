@@ -6,6 +6,7 @@
 #include "MFCApplication3.h"
 #include "MFCApplication3Dlg.h"
 #include "afxdialogex.h"
+#include "UPDClient.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -115,7 +116,7 @@ BOOL CMFCApplication3Dlg::OnInitDialog()
 	m_strServName = "127.0.0.1";
 	m_strServPort = 1000;
 	UpdateData(FALSE);
-	//m_sConnectSocket.SetParent(this);
+	m_sConnectSocket.SetParent(this);
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -173,5 +174,54 @@ HCURSOR CMFCApplication3Dlg::OnQueryDragIcon()
 void CMFCApplication3Dlg::OnBnClickedOk()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	CDialogEx::OnOK();
+
+	//CDialogEx::OnOK();
+
+	UpdateData(TRUE);
+	//创建套接字,使用默认参数
+	m_sConnectSocket.Create();
+	//连接到服务器
+	m_sConnectSocket.Connect(m_strServName, m_strServPort);
+	
+	//发送
+	int nLen;//消息的长度
+	int nSent;//被发送的消息的长度
+	if (!m_strMsg.IsEmpty()) {
+		nLen = m_strMsg.GetLength();
+		nSent = m_sConnectSocket.Send(LPCTSTR(m_strMsg), nLen);//发送消息，返回实际发送的字节长度
+		if (nSent != SOCKET_ERROR)//发送成功
+		{
+			m_strEcho = m_strMsg;
+			UpdateData(FALSE);
+		}
+		else
+		{
+			AfxMessageBox(_T("信息发送失败！"), MB_OK | MB_ICONSTOP);
+		}
+		m_strMsg.Empty();
+		UpdateData(FALSE);
+	}
+
+	//接收
+	char *pBuf = new char[1025];//数据接收缓冲区
+	int nBufSize = 1024;//可接收的最大长度
+	int nReceived;//接收的实际长度
+	CString strReceived;
+
+	//接收套接字中的服务器发来的消息
+	nReceived = m_sConnectSocket.Receive(pBuf, nBufSize);
+	if (nReceived != SOCKET_ERROR)//接收成功
+	{
+		pBuf[nReceived] = NULL;//结尾置为空
+		strReceived = pBuf;
+		m_strEcho = strReceived;//显示消息
+		UpdateData(FALSE);
+	}
+	else
+		AfxMessageBox(_T("信息接收失败！"), MB_OK | MB_ICONSTOP);
+	m_sConnectSocket.Close();
+}
+
+void CMFCApplication3Dlg::OnReceive()
+{
 }
