@@ -51,6 +51,10 @@ END_MESSAGE_MAP()
 
 CMFCApplication3Dlg::CMFCApplication3Dlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_MFCAPPLICATION3_DIALOG, pParent)
+	, m_strServName(_T(""))
+	, m_strServPort(0)
+	, m_strMsg(_T(""))
+	, m_strEcho(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -58,6 +62,12 @@ CMFCApplication3Dlg::CMFCApplication3Dlg(CWnd* pParent /*=NULL*/)
 void CMFCApplication3Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Text(pDX, IDC_EDIT4, m_strServName);
+	DDX_Text(pDX, IDC_EDIT2, m_strServPort);
+	DDV_MinMaxInt(pDX, m_strServPort, 0, 65535);
+	DDX_Text(pDX, IDC_EDIT1, m_strMsg);
+	DDX_Text(pDX, IDC_EDIT3, m_strEcho);
+	DDX_Control(pDX, IDC_BUTTON1, m_btnSend);
 }
 
 BEGIN_MESSAGE_MAP(CMFCApplication3Dlg, CDialogEx)
@@ -102,7 +112,10 @@ BOOL CMFCApplication3Dlg::OnInitDialog()
 	ShowWindow(SW_MINIMIZE);
 
 	// TODO: 在此添加额外的初始化代码
-
+	m_strServName = "127.0.0.1";
+	m_strServPort = 1000;
+	UpdateData(FALSE);
+	//m_sConnectSocket.SetParent(this);
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 

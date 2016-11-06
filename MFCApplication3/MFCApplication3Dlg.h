@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "afxwin.h"
 
 
 // CMFCApplication3Dlg 对话框
@@ -33,4 +34,14 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedOk();
+	// 服务器IP地址
+	CString m_strServName;
+	// 服务器端口
+	int m_strServPort;
+	// 请求命令
+	CString m_strMsg;
+	// 服务器响应
+	CString m_strEcho;
+	// 发送按钮
+	CButton m_btnSend;
 };
