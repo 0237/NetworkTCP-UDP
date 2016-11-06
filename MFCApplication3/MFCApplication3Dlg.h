@@ -4,7 +4,7 @@
 
 #pragma once
 #include "afxwin.h"
-
+#include "UPDClient.h"
 
 // CMFCApplication3Dlg 对话框
 class CMFCApplication3Dlg : public CDialogEx
@@ -12,7 +12,10 @@ class CMFCApplication3Dlg : public CDialogEx
 // 构造
 public:
 	CMFCApplication3Dlg(CWnd* pParent = NULL);	// 标准构造函数
-
+	UPDClient m_sConnectSocket;
+	void OnClose();
+	void OnConnect();
+	void OnReceive();
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_MFCAPPLICATION3_DIALOG };
