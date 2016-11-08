@@ -6,6 +6,7 @@
 #include "MFCApplication3.h"
 #include "MFCApplication3Dlg.h"
 #include "afxdialogex.h"
+#include "UDPClient.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -114,7 +115,7 @@ BOOL CMFCApplication3Dlg::OnInitDialog()
 
 	// TODO: 在此添加额外的初始化代码
 	m_strServName = "127.0.0.1";
-	m_strServPort = 1000;
+	m_strServPort = 2000;
 	UpdateData(FALSE);
 	//m_sConnectSocket.SetParent(this);
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
@@ -171,18 +172,44 @@ HCURSOR CMFCApplication3Dlg::OnQueryDragIcon()
 
 
 
-void CMFCApplication3Dlg::OnBnClickedOk()
+void CMFCApplication3Dlg::OnBnClickedOk()//这个没用，下面的button有用！
 {
 	// TODO: 在此添加控件通知处理程序代码
 
-}
-
-void CMFCApplication3Dlg::OnReceive()
-{
 }
 
 void CMFCApplication3Dlg::OnBnClickedButton1()
 {
+	m_strEcho = "创建套接口错误!";
+	UpdateData(TRUE);
 	// TODO: 在此添加控件通知处理程序代码
-
+	UDPClient MySock;
+	BOOL bFlag = MySock.Create(1242, SOCK_DGRAM, FD_READ);
+	if (!bFlag) 
+	{
+		m_strEcho = "创建套接口错误!";
+	}
+	else
+	{
+		int si = MySock.SendTo(m_strMsg, m_strMsg.GetLength(), m_strServPort, m_strServName);
+		if (si == SOCKET_ERROR)
+		{
+			m_strEcho = "发送请求错误!";
+		}
+		else
+		{
+			UINT r4;
+			char buffer[256];
+			int ri = MySock.ReceiveFrom(buffer, sizeof(buffer), m_strServName,r4);
+			if (ri == SOCKET_ERROR)
+			{
+				m_strEcho = "接受响应错误!";
+			}
+			else
+			{
+				m_strEcho = buffer;
+			}
+		}
+	}
+	UpdateData(FALSE);
 }

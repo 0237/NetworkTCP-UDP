@@ -11,7 +11,6 @@ class CMFCApplication3Dlg : public CDialogEx
 // 构造
 public:
 	CMFCApplication3Dlg(CWnd* pParent = NULL);	// 标准构造函数
-	void OnReceive();
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_MFCAPPLICATION3_DIALOG };
