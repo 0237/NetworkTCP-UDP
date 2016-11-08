@@ -1,6 +1,6 @@
 #pragma once
 #include "afxwin.h"
-
+#include "UDPSever.h"
 
 // UDPSeverDlg ¶Ô»°¿ò
 
@@ -22,6 +22,7 @@ protected:
 	virtual BOOL OnInitDialog();
 	DECLARE_MESSAGE_MAP()
 public:
+	UDPSever MySock;
 //	afx_msg void OnLbnSelchangeList2();
 	CString m_strLog;
 	afx_msg void OnLbnSelchangeList2();
