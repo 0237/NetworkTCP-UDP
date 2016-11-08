@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "MFCApplication3.h"
-#include "MFCApplication3Dlg.h"
+#include "ModelChosen.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -76,7 +76,7 @@ BOOL CMFCApplication3App::InitInstance()
 	// 例如修改为公司或组织名
 	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
 
-	CMFCApplication3Dlg dlg;
+	ModelChosen dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)

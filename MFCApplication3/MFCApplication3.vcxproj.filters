@@ -33,7 +33,13 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="UPDClient.h">
+    <ClInclude Include="ModelChosen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UDPSeverDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UDPClient.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,7 +53,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="UPDClient.cpp">
+    <ClCompile Include="ModelChosen.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UDPSeverDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UDPClient.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -63,6 +75,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\MFCApplication3.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="toolbar1.bmp">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

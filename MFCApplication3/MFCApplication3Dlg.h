@@ -4,7 +4,6 @@
 
 #pragma once
 #include "afxwin.h"
-#include "UPDClient.h"
 
 // CMFCApplication3Dlg 对话框
 class CMFCApplication3Dlg : public CDialogEx
@@ -12,7 +11,6 @@ class CMFCApplication3Dlg : public CDialogEx
 // 构造
 public:
 	CMFCApplication3Dlg(CWnd* pParent = NULL);	// 标准构造函数
-	CUDPClient m_sConnectSocket;
 	void OnReceive();
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
@@ -45,4 +43,5 @@ public:
 	CString m_strEcho;
 	// 发送按钮
 	CButton m_btnSend;
+	afx_msg void OnBnClickedButton1();
 };
