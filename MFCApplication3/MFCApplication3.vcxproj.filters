@@ -45,6 +45,18 @@
     <ClInclude Include="UDPSever.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="TCPClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPSever.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPClientDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPSeverDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MFCApplication3.cpp">
@@ -66,6 +78,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="UDPSever.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPClient.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPSever.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPClientDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPSeverDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

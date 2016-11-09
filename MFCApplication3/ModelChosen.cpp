@@ -7,6 +7,8 @@
 #include "afxdialogex.h"
 #include "MFCApplication3Dlg.h"
 #include "UDPSeverDlg.h"
+#include "TCPClientDlg.h"
+#include "TCPSeverDlg.h"
 
 // ModelChosen 对话框
 
@@ -40,17 +42,22 @@ END_MESSAGE_MAP()
 void ModelChosen::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	
+	TCPClientDlg *tcpc = new TCPClientDlg;
+	tcpc->Create(IDD_DIALOG3, this);
+	tcpc->ShowWindow(SW_SHOW);
+	TCPSeverDlg *tcps = new TCPSeverDlg;
+	tcps->Create(IDD_DIALOG4, this);
+	tcps->ShowWindow(SW_SHOW);
 }
 
 
 void ModelChosen::OnBnClickedButton2()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	CMFCApplication3Dlg *tcpc = new CMFCApplication3Dlg;
-	tcpc->Create(IDD_MFCAPPLICATION3_DIALOG, this);
-	tcpc->ShowWindow(SW_SHOW);
-	UDPSeverDlg *tcps = new UDPSeverDlg;
-	tcps->Create(IDD_DIALOG2, this);
-	tcps->ShowWindow(SW_SHOW);
+	CMFCApplication3Dlg *udpc = new CMFCApplication3Dlg;
+	udpc->Create(IDD_MFCAPPLICATION3_DIALOG, this);
+	udpc->ShowWindow(SW_SHOW);
+	UDPSeverDlg *udps = new UDPSeverDlg;
+	udps->Create(IDD_DIALOG2, this);
+	udps->ShowWindow(SW_SHOW);
 }
