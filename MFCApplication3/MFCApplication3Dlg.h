@@ -33,6 +33,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	UDPClient MySock;
+	int si;
 	afx_msg void OnBnClickedOk();
 	// ·þÎñÆ÷IPµØÖ·
 	CString m_strServName;
@@ -46,5 +47,4 @@ public:
 	CButton m_btnSend;
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
-	afx_msg void OnBnClickedButton3();
 };

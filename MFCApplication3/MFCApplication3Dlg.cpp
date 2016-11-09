@@ -78,7 +78,6 @@ BEGIN_MESSAGE_MAP(CMFCApplication3Dlg, CDialogEx)
 	ON_BN_CLICKED(IDOK, &CMFCApplication3Dlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BUTTON1, &CMFCApplication3Dlg::OnBnClickedButton1)
 	ON_WM_TIMER()
-	ON_BN_CLICKED(IDC_BUTTON3, &CMFCApplication3Dlg::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
 
@@ -187,11 +186,21 @@ void CMFCApplication3Dlg::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
 		UpdateData(TRUE);
-		MySock.Updated = true;
+		MySock.Reviewed = true;
 		int len = WideCharToMultiByte(CP_ACP, 0, m_strMsg, -1, NULL, 0, NULL, NULL);
 		char *buffer = new char[len + 1];
 		WideCharToMultiByte(CP_ACP, 0, m_strMsg, -1, buffer, len, NULL, NULL);
-		int si = MySock.SendTo(buffer, strlen(buffer), m_strServPort, m_strServName);
+		si = MySock.SendTo(buffer, strlen(buffer), m_strServPort, m_strServName);
+		//UpdateData(FALSE);
+}
+
+
+void CMFCApplication3Dlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	if (MySock.Reviewed)
+	{
+		MySock.Reviewed = false;
 		if (si == SOCKET_ERROR)
 		{
 			m_strEcho = "发送请求错误!";
@@ -208,24 +217,6 @@ void CMFCApplication3Dlg::OnBnClickedButton1()
 			}
 		}
 		UpdateData(FALSE);
-}
-
-
-void CMFCApplication3Dlg::OnTimer(UINT_PTR nIDEvent)
-{
-	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	if (MySock.Updated)
-	{
-		MySock.Updated = false;
-		UpdateData(FALSE);
 	}
 	CDialogEx::OnTimer(nIDEvent);
-}
-
-
-void CMFCApplication3Dlg::OnBnClickedButton3()
-{
-	// TODO: 在此添加控件通知处理程序代码
-	((CMFCApplication3Dlg*)theApp.GetMainWnd())->SetDlgItemTextW(IDC_EDIT3, m_strEcho);
-	UpdateData(FALSE);
 }

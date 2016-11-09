@@ -7,7 +7,7 @@ class UDPClient : public CAsyncSocket
 public:
 	int ri;
 	char m_charEcho[256];
-	bool Updated;
+	bool Reviewed;
 	UDPClient();
 	virtual ~UDPClient();
 	virtual void OnReceive(int nErrorCode);
