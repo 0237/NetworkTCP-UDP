@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "MFCApplication3.h"
 #include "UDPClient.h"
-
+#include "MFCApplication3Dlg.h"
 
 // UDPClient
 
@@ -12,6 +12,7 @@ UDPClient::UDPClient()
 {
 	//m_charEcho = 0;
 	//memset(m_charEcho, 0, sizeof(char));
+	Updated = false;
 }
 
 UDPClient::~UDPClient()
@@ -25,8 +26,12 @@ UDPClient::~UDPClient()
 void UDPClient::OnReceive(int nErrorCode)
 {
 	// TODO: 在此添加专用代码和/或调用基类
+	//Updated = true;
 	UINT r4;
-	CString r3;
+	CString r1,r3;
 	ri = ReceiveFrom(m_charEcho, sizeof(m_charEcho), r3, r4);
+	m_charEcho[strlen(m_charEcho)] = '\0';
+	r1 = m_charEcho;
+	((CMFCApplication3Dlg*)theApp.GetMainWnd())->SetDlgItemTextW(IDC_EDIT3, r1);
 	CAsyncSocket::OnReceive(nErrorCode);
 }

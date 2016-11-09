@@ -9,7 +9,7 @@ public:
 	UINT r4;
 	CString r3;
 	int si;
-	char m_charRequst[256] = "";
+	char m_charRequst[256];
 	CString m_strLog;
 	CString m_strMsg;
 	UDPSever();

@@ -77,6 +77,8 @@ BEGIN_MESSAGE_MAP(CMFCApplication3Dlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CMFCApplication3Dlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BUTTON1, &CMFCApplication3Dlg::OnBnClickedButton1)
+	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_BUTTON3, &CMFCApplication3Dlg::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
 
@@ -114,9 +116,12 @@ BOOL CMFCApplication3Dlg::OnInitDialog()
 	//ShowWindow(SW_MINIMIZE);
 
 	// TODO: 在此添加额外的初始化代码
+	MySock.Create(1242, SOCK_DGRAM, FD_READ);
 	m_strServName = "127.0.0.1";
+	//m_strMsg = "time";
 	m_strServPort = 2000;
 	UpdateData(FALSE);
+	SetTimer(1, 1000, NULL);         //启动定时器
 	//m_sConnectSocket.SetParent(this);
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -181,15 +186,12 @@ void CMFCApplication3Dlg::OnBnClickedOk()//这个没用，下面的button有用！
 void CMFCApplication3Dlg::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	UDPClient MySock;
-	BOOL bFlag = MySock.Create(1242, SOCK_DGRAM, FD_READ);
-	if (!bFlag) 
-	{
-		m_strEcho = "创建套接口错误!";
-	}
-	else
-	{
-		int si = MySock.SendTo(m_strMsg, m_strMsg.GetLength(), m_strServPort, m_strServName);
+		UpdateData(TRUE);
+		MySock.Updated = true;
+		int len = WideCharToMultiByte(CP_ACP, 0, m_strMsg, -1, NULL, 0, NULL, NULL);
+		char *buffer = new char[len + 1];
+		WideCharToMultiByte(CP_ACP, 0, m_strMsg, -1, buffer, len, NULL, NULL);
+		int si = MySock.SendTo(buffer, strlen(buffer), m_strServPort, m_strServName);
 		if (si == SOCKET_ERROR)
 		{
 			m_strEcho = "发送请求错误!";
@@ -205,6 +207,25 @@ void CMFCApplication3Dlg::OnBnClickedButton1()
 				m_strEcho = MySock.m_charEcho;
 			}
 		}
+		UpdateData(FALSE);
+}
+
+
+void CMFCApplication3Dlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	if (MySock.Updated)
+	{
+		MySock.Updated = false;
+		UpdateData(FALSE);
 	}
+	CDialogEx::OnTimer(nIDEvent);
+}
+
+
+void CMFCApplication3Dlg::OnBnClickedButton3()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	((CMFCApplication3Dlg*)theApp.GetMainWnd())->SetDlgItemTextW(IDC_EDIT3, m_strEcho);
 	UpdateData(FALSE);
 }

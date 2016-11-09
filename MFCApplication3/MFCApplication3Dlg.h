@@ -4,6 +4,7 @@
 
 #pragma once
 #include "afxwin.h"
+#include "UDPClient.h"
 
 // CMFCApplication3Dlg 对话框
 class CMFCApplication3Dlg : public CDialogEx
@@ -31,6 +32,7 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
+	UDPClient MySock;
 	afx_msg void OnBnClickedOk();
 	// 服务器IP地址
 	CString m_strServName;
@@ -43,4 +45,6 @@ public:
 	// 发送按钮
 	CButton m_btnSend;
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnBnClickedButton3();
 };

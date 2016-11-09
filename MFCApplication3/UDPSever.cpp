@@ -30,6 +30,7 @@ void UDPSever::OnReceive(int nErrorCode)
 	CTime t = CTime::GetCurrentTime();
 	m_strLog = t.Format(_T("%Y/%m/%d %H:%M:%S:"));
 	si = ReceiveFrom(m_charRequst, sizeof(m_charRequst), r3, r4);
+	m_charRequst[strlen(m_charRequst)] = '\0';
 	if (si == SOCKET_ERROR)
 	{
 		m_strLog += "Ω” ’«Î«Û¥ÌŒÛ!";
@@ -49,9 +50,17 @@ void UDPSever::OnReceive(int nErrorCode)
 		}
 		else
 		{
-			m_strMsg = t.Format(_T("¥ÌŒÛ«Î«Û"));
+			m_strMsg = "¥ÌŒÛ«Î«Û";
 		}
 		m_strLog += m_strMsg + _T("°ø\n");
+	}
+	int len = WideCharToMultiByte(CP_ACP, 0, m_strMsg, -1, NULL, 0, NULL, NULL);
+	char *buffer = new char[len + 1];
+	WideCharToMultiByte(CP_ACP, 0, m_strMsg, -1, buffer, len, NULL, NULL);
+	int ri = SendTo(buffer, strlen(buffer), r4, r3);
+	if (ri == SOCKET_ERROR)
+	{
+		m_strLog += "œÏ”¶¥ÌŒÛ!\n";
 	}
 	CAsyncSocket::OnReceive(nErrorCode);
 }
