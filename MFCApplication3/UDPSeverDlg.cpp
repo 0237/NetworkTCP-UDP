@@ -28,7 +28,6 @@ void UDPSeverDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_LBString(pDX, IDC_LIST2, m_strLog);
-	DDX_Text(pDX, IDC_EDIT1, testtttt);
 	DDX_Control(pDX, IDC_LIST2, m_ListBox_Content);
 }
 

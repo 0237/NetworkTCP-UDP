@@ -12,5 +12,3 @@ public:
 	virtual ~UDPClient();
 	virtual void OnReceive(int nErrorCode);
 };
-
-
