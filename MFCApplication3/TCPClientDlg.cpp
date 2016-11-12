@@ -47,7 +47,9 @@ void TCPClientDlg::OnBnClickedConnect()
 	m_clientSocket.m_bConnected = FALSE;
 	CAddrDlg m_Dlg; 
 	//默认端口1088
-	m_Dlg.m_Port=1088; 
+	m_Dlg.m_Port=1088;
+	//默认IP地址127.0.0.1
+	//m_Dlg.m_Addr = "127.0.0.1";
 	if (m_Dlg.DoModal() == IDOK && !m_Dlg.m_Addr.IsEmpty()) {
 		memcpy(m_szServerAdr, m_Dlg.m_Addr, sizeof(m_szServerAdr));
 		m_szPort = m_Dlg.m_Port; 

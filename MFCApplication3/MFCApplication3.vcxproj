@@ -196,6 +196,7 @@
     <ClInclude Include="TCPClientDlg.h" />
     <ClInclude Include="TCPSever.h" />
     <ClInclude Include="TCPSeverDlg.h" />
+    <ClInclude Include="TCPSeverListen.h" />
     <ClInclude Include="UDPClient.h" />
     <ClInclude Include="UDPSever.h" />
     <ClInclude Include="UDPSeverDlg.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="TCPClientDlg.cpp" />
     <ClCompile Include="TCPSever.cpp" />
     <ClCompile Include="TCPSeverDlg.cpp" />
+    <ClCompile Include="TCPSeverListen.cpp" />
     <ClCompile Include="UDPClient.cpp" />
     <ClCompile Include="UDPSever.cpp" />
     <ClCompile Include="UDPSeverDlg.cpp" />
