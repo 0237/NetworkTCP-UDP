@@ -24,6 +24,8 @@ TCPClientDlg::~TCPClientDlg()
 void TCPClientDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_EDITMSG, m_MSG);
+	DDX_Control(pDX, IDC_LISTMSG, m_MSGS);
 }
 
 
