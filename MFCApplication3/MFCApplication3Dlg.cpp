@@ -191,6 +191,8 @@ void CMFCApplication3Dlg::OnBnClickedButton1()
 		char *buffer = new char[len + 1];
 		WideCharToMultiByte(CP_ACP, 0, m_strMsg, -1, buffer, len, NULL, NULL);
 		si = MySock.SendTo(buffer, strlen(buffer), m_strServPort, m_strServName);
+		//delete[]buffer;
+		//m_strMsg.Empty();
 		//UpdateData(FALSE);
 }
 
@@ -217,6 +219,7 @@ void CMFCApplication3Dlg::OnTimer(UINT_PTR nIDEvent)
 			}
 		}
 		UpdateData(FALSE);
+		//m_strMsg.Empty();
 	}
 	CDialogEx::OnTimer(nIDEvent);
 }

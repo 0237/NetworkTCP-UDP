@@ -38,6 +38,7 @@ void UDPSever::OnReceive(int nErrorCode)
 	else
 	{
 		m_strMsg = m_charRequst;CString R4;R4.Format(_T("%d"), r4);;
+		//delete[]m_charRequst;
 		m_strLog += _T("收到IP=") + r3 + _T(" Port=") + R4 + _T("请求【") + m_strMsg + _T("】,响应【");
 		m_strMsg.MakeLower();
 		if (m_strMsg == "date")
