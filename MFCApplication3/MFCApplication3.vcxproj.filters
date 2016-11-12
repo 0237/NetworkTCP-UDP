@@ -57,6 +57,9 @@
     <ClInclude Include="TCPSeverDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="AddrDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MFCApplication3.cpp">
@@ -90,6 +93,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TCPSeverDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AddrDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

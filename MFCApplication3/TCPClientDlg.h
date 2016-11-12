@@ -1,12 +1,20 @@
 #pragma once
 #include "afxwin.h"
-
+#include "AddrDlg.h"
+#include "TCPClient.h"
 
 // TCPClientDlg 对话框
 
 class TCPClientDlg : public CDialogEx
 {
 	DECLARE_DYNAMIC(TCPClientDlg)
+
+protected: 
+	int TryCount;
+	TCPClient m_clientSocket;
+	UINT m_szPort;
+public: 
+	char m_szServerAdr[256];
 
 public:
 	TCPClientDlg(CWnd* pParent = NULL);   // 标准构造函数
@@ -24,4 +32,7 @@ protected:
 public:
 	CEdit m_MSG;
 	CListBox m_MSGS;
+	afx_msg void OnBnClickedConnect();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnBnClickedExit();
 };

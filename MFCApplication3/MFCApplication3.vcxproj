@@ -185,6 +185,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddrDlg.h" />
     <ClInclude Include="MFCApplication3.h" />
     <ClInclude Include="MFCApplication3Dlg.h" />
     <ClInclude Include="ModelChosen.h" />
@@ -200,6 +201,7 @@
     <ClInclude Include="UDPSeverDlg.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddrDlg.cpp" />
     <ClCompile Include="MFCApplication3.cpp" />
     <ClCompile Include="MFCApplication3Dlg.cpp" />
     <ClCompile Include="ModelChosen.cpp" />
