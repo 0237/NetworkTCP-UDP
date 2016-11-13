@@ -9,7 +9,7 @@ class TCPClientDlg : public CDialogEx
 {
 	DECLARE_DYNAMIC(TCPClientDlg)
 
-protected: 
+public:
 	int TryCount;
 	TCPClient m_clientSocket;
 	UINT m_szPort;
@@ -35,4 +35,5 @@ public:
 	afx_msg void OnBnClickedConnect();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedExit();
+	afx_msg void OnBnClickedSend();
 };

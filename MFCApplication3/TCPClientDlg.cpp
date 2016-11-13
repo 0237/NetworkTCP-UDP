@@ -33,6 +33,7 @@ BEGIN_MESSAGE_MAP(TCPClientDlg, CDialogEx)
 	ON_BN_CLICKED(ID_Connect, &TCPClientDlg::OnBnClickedConnect)
 	ON_WM_TIMER()
 	ON_BN_CLICKED(ID_Exit, &TCPClientDlg::OnBnClickedExit)
+	ON_BN_CLICKED(ID_Send, &TCPClientDlg::OnBnClickedSend)
 END_MESSAGE_MAP()
 
 
@@ -94,4 +95,22 @@ void TCPClientDlg::OnBnClickedExit()
 	m_clientSocket.ShutDown(2); 
 	//关闭对话框
 	//EndDialog(0);
+}
+
+
+void TCPClientDlg::OnBnClickedSend()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if (m_clientSocket.m_bConnected)
+	{
+		CString buffer1;
+		m_MSG.GetWindowText(buffer1);
+		m_clientSocket.m_nLength = buffer1.GetLength();
+		int len = WideCharToMultiByte(CP_ACP, 0, buffer1, -1, NULL, 0, NULL, NULL);
+		char *buffer2 = new char[len + 1];
+		WideCharToMultiByte(CP_ACP, 0, buffer1, -1, buffer2, len, NULL, NULL);
+		strcpy_s(m_clientSocket.m_szBuffer, buffer2);
+		m_clientSocket.AsyncSelect(FD_WRITE);
+		m_MSG.SetWindowText(_T(""));
+	}
 }
