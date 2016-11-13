@@ -112,7 +112,7 @@ void TCPClientDlg::OnBnClickedExit()
 	// TODO: 在此添加控件通知处理程序代码
 	//关闭Socket
 	m_clientSocket.ShutDown(2); 
-	m_MSGS.InsertString(0, _T("Shutdown the socket"));
+	m_MSGS.InsertString(0, _T("Shutdown!"));
 	//关闭对话框
 	//EndDialog(0);
 }

@@ -36,10 +36,10 @@ void TCPClient::OnReceive(int nErrorCode)
 	CString buffer = _T("Receive:");
 	m_nLength = Receive(m_szBuffer, sizeof(m_szBuffer), 0);
 	//下面两行代码用来获取对话框指针
-	//CMFCApplication3App* pApp=(CMFCApplication3App*)AfxGetApp();
-	//TCPClientDlg* pDlg = (TCPClientDlg*)pApp ->m_pMainWnd;
+	//CMFCApplication3App* pApp = (CMFCApplication3App*)AfxGetApp()
+	//TCPClientDlg* pDlg = (TCPClientDlg*)pApp->m_pMainWnd
 	buffer += m_szBuffer;
-	m_pDlg ->m_MSGS.InsertString(0, buffer);//这里可能有错误！！！
+	m_pDlg->m_MSGS.InsertString(0, buffer);//这里可能有错误！！！
 	memset(m_szBuffer, 0, sizeof(m_szBuffer));
 	CAsyncSocket::OnReceive(nErrorCode);
 }

@@ -24,11 +24,13 @@ TCPSeverDlg::~TCPSeverDlg()
 void TCPSeverDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST1, m_MSGS);
 }
 
 
 BEGIN_MESSAGE_MAP(TCPSeverDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BNListen, &TCPSeverDlg::OnBnClickedBnlisten)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -38,6 +40,8 @@ END_MESSAGE_MAP()
 void TCPSeverDlg::OnBnClickedBnlisten()
 {
 	// TODO: 在此添加控件通知处理程序代码
+	//HWND hWnd = ::FindWindow(NULL, _T("TCPSever"));      //得到对话框的句柄
+	//TCPSeverDlg* pWnd = (TCPSeverDlg*)FromHandle(hWnd); //由句柄得到对话框的对象指针
 	if (m_srvrSocket.m_hSocket == INVALID_SOCKET)
 	{
 		BOOL bFlag = m_srvrSocket.Create(1088, SOCK_STREAM, FD_ACCEPT);
@@ -50,7 +54,12 @@ void TCPSeverDlg::OnBnClickedBnlisten()
 			return;
 		}
 	}
+	//m_srvrSocket.SetParent(pWnd);
+	//m_srvrSocket2.SetParent(pWnd);
 	//“监听”成功，等待连接请求
+	//pWnd->m_MSGS.InsertString(0, m_srvrSocket.m_MMS);
+	//m_MSGS.AddString(_T("Listening...\n"));
+	SetTimer(1, 1000, NULL);
 	if (!m_srvrSocket.Listen(1))
 	{ 
 		int nErrorCode = m_srvrSocket.GetLastError();
@@ -62,4 +71,27 @@ void TCPSeverDlg::OnBnClickedBnlisten()
 			return;
 		}
 	}
+}
+
+
+void TCPSeverDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+
+	//m_MSGS.AddString(m_srvrSocket.m_MMS);
+	if (m_srvrSocket.NewRequest)
+	{
+		CTime t = CTime::GetCurrentTime();
+		//t.Format(_T("%Y/%m/%d %H:%M:%S:"));
+		m_srvrSocket.NewRequest = false;
+		m_MSGS.AddString(t.Format(_T("%Y/%m/%d %H:%M:%S:"))+m_srvrSocket.m_MMS);
+		//UpdateData(TRUE);
+	}
+	if (m_srvrSocket.m_pSocket!=NULL&&m_srvrSocket.m_pSocket->NewRequest)
+	{
+		m_srvrSocket.m_pSocket->NewRequest = false;
+		m_MSGS.AddString(m_srvrSocket.m_pSocket->m_MMS2);
+		//UpdateData(TRUE);
+	}
+	CDialogEx::OnTimer(nIDEvent);
 }
