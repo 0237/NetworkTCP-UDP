@@ -4,7 +4,7 @@
 #include "TCPClient.h"
 
 // TCPClientDlg 对话框
-
+// class TCPClient;
 class TCPClientDlg : public CDialogEx
 {
 	DECLARE_DYNAMIC(TCPClientDlg)
@@ -36,4 +36,8 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedExit();
 	afx_msg void OnBnClickedSend();
+	// 端口号
+	UINT m_Iport;
+	// IP地址
+	CString m_IPaddr;
 };
