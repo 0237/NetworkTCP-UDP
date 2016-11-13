@@ -77,12 +77,9 @@ void TCPSeverDlg::OnBnClickedBnlisten()
 void TCPSeverDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-
-	//m_MSGS.AddString(m_srvrSocket.m_MMS);
 	if (m_srvrSocket.NewRequest)
 	{
 		CTime t = CTime::GetCurrentTime();
-		//t.Format(_T("%Y/%m/%d %H:%M:%S:"));
 		m_srvrSocket.NewRequest = false;
 		m_MSGS.AddString(t.Format(_T("%Y/%m/%d %H:%M:%S:"))+m_srvrSocket.m_MMS);
 		//UpdateData(TRUE);
